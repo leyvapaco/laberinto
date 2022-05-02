@@ -25,9 +25,6 @@ function Mayor () {
     if (lista[7] >= max) {
         max = lista[7]
     }
-    if (lista[8] >= max) {
-        max = lista[8]
-    }
     mejorGiro = lista.indexOf(max)
     basic.showNumber(mejorGiro)
     radio.sendNumber(mejorGiro)
@@ -38,7 +35,7 @@ function Mayor () {
 function Avanza () {
     d1 = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
     while (true) {
-        maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 30)
+        maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 120)
         while (d1 >= 7) {
             basic.pause(100)
             d1 = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
@@ -58,15 +55,16 @@ function Escanea () {
     distancia = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
     basic.showNumber(distancia)
     lista = []
-    lista.push(distancia)
+    lista.unshift(distancia)
     radio.sendNumber(distancia)
     basic.pause(200)
     for (let index = 0; index <= 6; index++) {
         giraDcha()
         distancia = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
-        if (index >= 2 && index <= 3) {
+        if (index >= 2 && index <= 4) {
             distancia += -100
         }
+        basic.showNumber(distancia)
         lista.push(distancia)
         radio.sendNumber(distancia)
         basic.pause(200)
@@ -80,16 +78,18 @@ function Escanea () {
 function giraIzda () {
     maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 160)
     maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, 160)
-    basic.pause(100)
+    basic.pause(55)
     maqueen.motorStop(maqueen.Motors.All)
     music.playTone(262, music.beat(BeatFraction.Eighth))
+    basic.pause(6000)
 }
 function giraDcha () {
     maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 160)
     maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 160)
-    basic.pause(100)
+    basic.pause(55)
     maqueen.motorStop(maqueen.Motors.All)
     music.playTone(247, music.beat(BeatFraction.Eighth))
+    basic.pause(6000)
 }
 function rectifica () {
     giraIzda()
