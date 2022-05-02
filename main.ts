@@ -80,14 +80,14 @@ function Escanea () {
 function giraIzda () {
     maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 160)
     maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CCW, 160)
-    basic.pause(50)
+    basic.pause(100)
     maqueen.motorStop(maqueen.Motors.All)
     music.playTone(262, music.beat(BeatFraction.Eighth))
 }
 function giraDcha () {
     maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 160)
     maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CCW, 160)
-    basic.pause(50)
+    basic.pause(100)
     maqueen.motorStop(maqueen.Motors.All)
     music.playTone(247, music.beat(BeatFraction.Eighth))
 }
