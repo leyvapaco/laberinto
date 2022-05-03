@@ -27,10 +27,6 @@ function Mayor () {
     }
     mejorGiro = lista.indexOf(max)
     basic.showNumber(mejorGiro)
-    radio.sendNumber(mejorGiro)
-    basic.pause(500)
-    radio.sendNumber(0)
-    music.playTone(784, music.beat(BeatFraction.Double))
 }
 function Avanza () {
     d1 = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
@@ -41,7 +37,6 @@ function Avanza () {
             d1 = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
         }
         maqueen.motorStop(maqueen.Motors.All)
-        radio.sendNumber(0)
         Escanea()
         d1 = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
     }
@@ -50,26 +45,18 @@ input.onButtonPressed(Button.A, function () {
     Avanza()
 })
 function Escanea () {
-    basic.clearScreen()
     giraDcha()
     distancia = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
-    basic.showNumber(distancia)
     lista = []
     lista.unshift(distancia)
-    radio.sendNumber(distancia)
-    basic.pause(200)
     for (let index = 0; index <= 6; index++) {
         giraDcha()
         distancia = Math.trunc(maqueen.Ultrasonic(PingUnit.Centimeters))
         if (index >= 2 && index <= 4) {
-            distancia += -100
+            distancia += -20
         }
-        basic.showNumber(distancia)
         lista.push(distancia)
-        radio.sendNumber(distancia)
-        basic.pause(200)
     }
-    radio.sendNumber(0)
     Mayor()
     for (let index = 0; index < 7 - mejorGiro; index++) {
         giraIzda()
@@ -81,7 +68,6 @@ function giraIzda () {
     basic.pause(55)
     maqueen.motorStop(maqueen.Motors.All)
     music.playTone(262, music.beat(BeatFraction.Eighth))
-    basic.pause(6000)
 }
 function giraDcha () {
     maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 160)
@@ -89,7 +75,6 @@ function giraDcha () {
     basic.pause(55)
     maqueen.motorStop(maqueen.Motors.All)
     music.playTone(247, music.beat(BeatFraction.Eighth))
-    basic.pause(6000)
 }
 function rectifica () {
     giraIzda()
@@ -110,4 +95,5 @@ let d1 = 0
 let mejorGiro = 0
 let lista: number[] = []
 let max = 0
+basic.showNumber(1)
 radio.setGroup(13)
